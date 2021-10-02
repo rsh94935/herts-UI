@@ -12,6 +12,7 @@ export class SplashComponent implements OnInit {
 
   ngOnInit(): void { }
 
+  //Open login page
   public navigate(): void {
     this.router.navigateByUrl('/login');
   }

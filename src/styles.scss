@@ -1,4 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
+.background {
+    background-image: url("/assets/pexels-essow-1285618.jpg");
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.innerBody {
+    background-color: white;
+    opacity: 0.9;
+    width: 300px;
+    height: 500px;
+}
+
 .button {
     height: 30px;
     width: 90px;
@@ -47,6 +65,7 @@ input[type=text] {
     border-bottom: 1px solid darkgray;
     outline: none;
     text-align: end;
+    width: 95%;
 }
 
 input[type=text]:focus {

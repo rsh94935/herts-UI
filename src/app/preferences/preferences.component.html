@@ -1,6 +1,6 @@
-<div class="prefs-container">
+<div class="prefs-container innerBody">
     <div class="title">
-        Select your favourite activities
+        {{title}}
     </div>
     <div class="choice-container">
         <div *ngFor="let choice of choices;" (click)="selectChoice(choice)" [ngClass]="getClass(choice)">

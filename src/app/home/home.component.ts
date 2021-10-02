@@ -12,6 +12,7 @@ export class HomeComponent implements OnInit {
 
   constructor(private router: Router) { }
 
+  //Load user details (required for welcoming text)
   ngOnInit(): void {
     const details = localStorage.getItem("Data");
 
@@ -20,18 +21,22 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  //Open train travel page
   public travelByTrain(): void {
     this.router.navigateByUrl("train-plan");
   }
 
+  //Open car travel page
   public travelByCar(): void {
     this.router.navigateByUrl("car-plan");
   }
 
+  //Open user details page
   public goToEditUserDetails(): void {
     this.router.navigateByUrl("signup");
   }
 
+  //Open user preferences page
   public goToEditPreferences(): void {
     this.router.navigateByUrl("preferences");
   }

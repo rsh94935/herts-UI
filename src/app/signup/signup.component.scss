@@ -10,10 +10,10 @@
 .field {
     width: 100%;
     display: grid;
-    grid-template-rows: 30px 30px;
+    grid-template-rows: 30px 20px;
     grid-template-columns: 1fr;
     &input {
         width: 100%;
     }
-    padding: 5px;
+    margin: 5px;
 }
