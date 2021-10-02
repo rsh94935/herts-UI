@@ -1,0 +1,19 @@
+.signup-form {
+    width: 300px;
+    height: 500px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 60px 1fr;
+    margin: auto;
+}
+
+.field {
+    width: 100%;
+    display: grid;
+    grid-template-rows: 30px 30px;
+    grid-template-columns: 1fr;
+    &input {
+        width: 100%;
+    }
+    padding: 5px;
+}

@@ -1,0 +1,33 @@
+<div class="signup-form">
+    <div class="title">{{title}}</div>
+    <div class="signup-fields">
+        <form [formGroup]="detailsForm" (ngSubmit)="onSubmit()">
+            <div class="field">
+                <div>First Name:</div>
+                <input type="text"  formControlName="fname" required>
+            </div>
+            <div class="field">
+                <div>Last Name:</div>
+                <input type="text"  formControlName="lname" required>
+            </div>
+            <div class="field">
+                <div>Address Line 1:</div>
+                <input type="text"  formControlName="address1" required>
+            </div>
+            <div class="field">
+                <div>Address Line 2:</div>
+                <input type="text"  formControlName="address2">
+            </div>
+            <div class="field">
+                <div>City:</div>
+                <input type="text"  formControlName="city" required>
+            </div>
+            <div class="field">
+                <div>Post Code:</div>
+                <input type="text"  formControlName="postcode" required>
+            </div>
+            <br>
+            <input type="submit">
+        </form>
+    </div>
+</div>

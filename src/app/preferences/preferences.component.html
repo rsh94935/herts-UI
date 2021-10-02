@@ -1,0 +1,18 @@
+<div class="prefs-container">
+    <div class="title">
+        Select your favourite activities
+    </div>
+    <div class="choice-container">
+        <div *ngFor="let choice of choices;" (click)="selectChoice(choice)" [ngClass]="getClass(choice)">
+                {{choice}}
+        </div>
+    </div>
+    <div class="button-container">
+        <div class="button active-button" (click)="skip()">
+            SKIP FOR NOW
+        </div>
+        <div [ngClass]="canContinue()" (click)="continue()">
+            CONTINUE
+        </div>
+    </div>
+</div>

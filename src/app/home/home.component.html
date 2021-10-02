@@ -1,0 +1,27 @@
+<div class="welcome">
+    <div class="title">
+        Welcome {{userDetails.fname}} {{userDetails.lname}}!
+    </div>
+    <div class="travel-container">
+        <div class="option">
+            <div class="button active-button" (click)="travelByTrain()">
+                Journey by Train
+            </div>
+        </div>
+        <div class="option">
+            <div class="button active-button" (click)="travelByCar()">
+                Journey by Car
+            </div>
+        </div>
+        <div class="option">
+            <div class="button active-button" (click)="goToEditUserDetails()">
+                Edit my details
+            </div>
+        </div>
+        <div class="option">
+            <div class="button active-button" (click)="goToEditPreferences()">
+                Edit my preferences
+            </div>
+        </div>
+    </div>
+</div>
