@@ -1,7 +1,7 @@
 <div class="signup-form innerBody">
     <div class="title">{{title}}</div>
     <div class="signup-fields">
-        <form [formGroup]="detailsForm" (ngSubmit)="onSubmit()">
+        <form [formGroup]="detailsForm" (ngSubmit)="onSubmit()" style="position: relative; height: 440px;">
             <div class="field">
                 <div>First Name:</div>
                 <input type="text"  formControlName="fname" required>
@@ -27,7 +27,9 @@
                 <input type="text"  formControlName="postcode" required>
             </div>
             <br>
-            <input type="submit">
+            <div class="submitter">
+                <input type="submit">
+            </div>
         </form>
     </div>
 </div>

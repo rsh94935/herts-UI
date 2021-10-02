@@ -40,4 +40,11 @@ export class HomeComponent implements OnInit {
   public goToEditPreferences(): void {
     this.router.navigateByUrl("preferences");
   }
+
+  //Logout of session
+  public logout(): void {
+    localStorage.removeItem("Data");
+    localStorage.removeItem("Prefs");
+    this.router.navigateByUrl("splash");
+  }
 }

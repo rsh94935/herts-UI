@@ -58,6 +58,23 @@
     user-select: none;
 }
 
+input[type=submit] {
+    height: 30px;
+    width: 90px;
+    border-radius: 5px;
+    color: white;
+    font-size: 10px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1px;
+    cursor: pointer;
+    background-color: #1289c7;
+    outline: none;
+    border: none;
+}
+
 input[type=text] {
     border-top: none;
     border-left: none;
