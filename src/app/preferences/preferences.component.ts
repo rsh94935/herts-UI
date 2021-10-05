@@ -1,3 +1,4 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -7,20 +8,31 @@ import { Router } from '@angular/router';
   styleUrls: ['./preferences.component.scss']
 })
 export class PreferencesComponent implements OnInit {
+  AWS: any;
+  data: any = {};
   title: string = "Select your favourite activities";
   //Choices array also populates the HTML page, to add any future preferences, just need to add to the array
   choices: Array<string> = ["Historical Landmarks", "Restaurants", "Shopping Centers", "Supermarkets", "Activities", "Walking Routes"];
   chosen: Array<string> = [];
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private httpClient: HttpClient) { }
 
   //Need to check that the Preferences are in the local storage already, if they are then setup the chosen array with the contents of the localstorage
   ngOnInit(): void {
-    const prefs = localStorage.getItem("Prefs");
+    const prefs = localStorage.getItem("Data");
+    this.AWS = localStorage.getItem('AWSLogin');
 
     if ( prefs !== undefined && typeof(prefs) === "string" ) {
-      this.chosen = JSON.parse(prefs).choices;
-      this.title = "Edit your favourite activities";
+      const prefData = JSON.parse(prefs);
+      if ( !!prefData.preferences ) {
+        this.chosen = prefData.preferences;
+        this.title = "Edit your favourite activities";
+      }
+  
+      for ( let key in prefData ) {
+        if ( key !== "preferences" )
+        this.data[key] = prefData[key];
+      }
     }
   }
 
@@ -48,7 +60,25 @@ export class PreferencesComponent implements OnInit {
 
   //Save the user preferences to both the dynamoDB, and keep a copy in the local storage so that the user does not ramp up AWS usage costs
   public continue(): void {
-    localStorage.setItem('Prefs', JSON.stringify({choices: this.chosen}));
-    this.router.navigateByUrl("/home");
+    let params: any = {
+      username: JSON.parse(this.AWS).Username,
+      preferences: this.chosen
+    }
+    let prefData: any = {
+      preferences: this.chosen
+    }
+    let header = {
+      headers: new HttpHeaders().set("Authorization", "Bearer " + JSON.parse(this.AWS).AccessToken)
+    }
+
+    for ( let key in this.data ) {
+      prefData[key] = this.data[key];
+      params[key] = this.data[key];
+    }
+    this.httpClient.post("https://a1fivkgat7.execute-api.eu-west-2.amazonaws.com/dev/setUserData", params, header).subscribe(res => {
+      //If new user, go to signup page
+      localStorage.setItem('Data', JSON.stringify(prefData));
+      this.router.navigateByUrl("/home");
+    });
   }
 }

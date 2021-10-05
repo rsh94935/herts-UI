@@ -44,7 +44,7 @@ export class HomeComponent implements OnInit {
   //Logout of session
   public logout(): void {
     localStorage.removeItem("Data");
-    localStorage.removeItem("Prefs");
+    localStorage.removeItem("AWSLogin");
     this.router.navigateByUrl("splash");
   }
 }
