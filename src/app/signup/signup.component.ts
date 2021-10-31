@@ -31,11 +31,15 @@ export class SignupComponent implements OnInit {
 
     if ( details !== undefined && typeof(details) === "string" ) {
       const json = JSON.parse(details);
-      if ( !json["preferences"] === undefined ) {
-        this.preferences = json["preferences"];
-        delete json["preferences"];
+      const userDets = {
+        fname: json.fname,
+        lname: json.lname,
+        add1: json.add1,
+        add2: json.add2,
+        city: json.city,
+        postcode: json.postcode
       }
-      this.detailsForm.setValue(json);
+      this.detailsForm.setValue(userDets);
       //If there were existing details in the local storage, alter the title of the page to read Edit user details
       this.title = "Edit user details";
     }

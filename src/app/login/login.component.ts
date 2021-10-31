@@ -64,12 +64,12 @@ export class LoginComponent implements OnInit {
             //Check to see whether a required field exists in the database, if not, has to be a new user
             if ( userDetails["message"]["fname"] === "" || userDetails["message"]["fname"] === undefined ) {
               this.router.navigateByUrl('/signup');
-            } else if ( userDetails["message"]["preferences"] === "" || userDetails["message"]["preferences"] === undefined ) {
+            } else if ( userDetails["message"]["preferences"][0] === "[]" || userDetails["message"]["preferences"] === undefined ) {
               let obj: any = {};
 
               for ( let key in userDetails["message"] ) {
                 if ( key !== "username" ) {
-                  obj[key] = userDetails["message"][key].replace(/\"/g,'');
+                  obj[key] = userDetails["message"][key].toString().replace(/\"/g,'');
                 }
               }
               localStorage.setItem("Data", JSON.stringify(obj));

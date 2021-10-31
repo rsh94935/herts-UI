@@ -15,6 +15,7 @@ export class PreferencesComponent implements OnInit {
   choices: Array<string> = ["Historical Landmarks", "Restaurants", "Shopping Centers", "Supermarkets", "Activities", "Walking Routes"];
   chosen: Array<string> = [];
 
+
   constructor(private router: Router, private httpClient: HttpClient) { }
 
   //Need to check that the Preferences are in the local storage already, if they are then setup the chosen array with the contents of the localstorage
@@ -25,13 +26,14 @@ export class PreferencesComponent implements OnInit {
     if ( prefs !== undefined && typeof(prefs) === "string" ) {
       const prefData = JSON.parse(prefs);
       if ( !!prefData.preferences ) {
-        this.chosen = prefData.preferences;
+        this.chosen = typeof(prefData.preferences) === "object" ? prefData.preferences : JSON.parse(prefData.preferences);
         this.title = "Edit your favourite activities";
       }
   
       for ( let key in prefData ) {
-        if ( key !== "preferences" )
-        this.data[key] = prefData[key];
+        if ( key !== "preferences" ) {
+          this.data[key] = prefData[key];
+        }
       }
     }
   }
@@ -70,6 +72,8 @@ export class PreferencesComponent implements OnInit {
     let header = {
       headers: new HttpHeaders().set("Authorization", "Bearer " + JSON.parse(this.AWS).AccessToken)
     }
+
+    debugger
 
     for ( let key in this.data ) {
       prefData[key] = this.data[key];

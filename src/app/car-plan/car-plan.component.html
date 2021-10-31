@@ -1,3 +1,87 @@
 <div class="innerBody">
-    Placeholder for car journey planning
+    <div class="title">
+        Enter Journey details
+    </div>
+    <div class="breakdown">
+        <div id="cl">
+            <div class="header">
+                <div class="headerText">
+                    Start location
+                </div>
+                <div class="headerIcon" (click)="toggle(0)">
+                    <img *ngIf="!oExpanded[0]" src="assets/down.svg">
+                    <img *ngIf="oExpanded[0]" src="assets/up.svg">
+                </div>
+            </div>
+            <div [ngClass]="oExpanded[0] ? 'expanded' : 'collapsed'" [ngStyle]="checkCustom() ? {'height' : '330px'} : {'height' : '40px'}">
+                <div class="radio">
+                    <div>
+                        <input type="radio" name="location" (change)="handleChange('current')" checked>
+                        <label>Current Location</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="location" (change)="handleChange('custom')">
+                        <label>Custom Location</label>
+                    </div>
+                </div>
+                <div *ngIf="checkCustom()">
+                    <form (ngSubmit)="onCustomSubmit()" #currentLocationForm="ngForm" style="position: relative; height: 280px;">
+                        <label for="streetAddress">Street Address</label>
+                        <input type="text" class="form-control" id="streetAddress"
+                            [(ngModel)]="current.streetAddress" name="streetAddress" required>
+                        <label for="locality">Town</label>
+                        <input type="text" class="form-control" id="locality"
+                            [(ngModel)]="current.locality" name="locality" required>
+                        <label for="adminDistrict">County</label>
+                        <input type="text" class="form-control" id="adminDistrict"
+                            [(ngModel)]="current.adminDistrict" name="adminDistrict" required>
+                        <label for="adminDistrict">Country</label>
+                        <input type="text" class="form-control" id="adminDistrict"
+                            [(ngModel)]="current.adminDistrict" name="adminDistrict" required>
+                        <label for="streetAddress">Post Code</label>
+                        <input type="text" class="form-control" id="postCode"
+                            [(ngModel)]="current.postCode" name="postCode" required>
+                        <div class="submitter">
+                            <button type="submit" class="button" [disabled]="!currentLocationForm.form.valid">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="underline"></div>
+        </div>
+        <div id="tl">
+            <div class="header">
+                <div class="headerText">
+                    End location
+                </div>
+                <div class="headerIcon" (click)="toggle(1)">
+                    <img *ngIf="!oExpanded[1]" src="assets/down.svg">
+                    <img *ngIf="oExpanded[1]" src="assets/up.svg">
+                </div>
+            </div>
+            <div [ngClass]="oExpanded[1] ? 'expanded' : 'collapsed'" style="position: relative; height: 280px;">
+                <form (ngSubmit)="onCustomSubmit()" #endLocationForm="ngForm">
+                    <label for="streetAddress">Street Address</label>
+                    <input type="text" class="form-control" id="streetAddress"
+                        [(ngModel)]="end.streetAddress" name="streetAddress" required>
+                    <label for="locality">Town</label>
+                    <input type="text" class="form-control" id="locality"
+                        [(ngModel)]="end.locality" name="locality" required>
+                    <label for="adminDistrict">County</label>
+                    <input type="text" class="form-control" id="adminDistrict"
+                        [(ngModel)]="end.adminDistrict" name="adminDistrict" required>
+                    <label for="adminDistrict">Country</label>
+                    <input type="text" class="form-control" id="adminDistrict"
+                        [(ngModel)]="end.adminDistrict" name="adminDistrict" required>
+                    <label for="streetAddress">Post Code</label>
+                    <input type="text" class="form-control" id="postCode"
+                        [(ngModel)]="end.postCode" name="postCode" required>
+                    <div class="submitter">
+                        <button type="submit" class="button" [disabled]="!endLocationForm.form.valid">Submit</button>
+                    </div>
+                </form>
+            </div>
+            <div class="underline"></div>
+        </div>
+    </div>
 </div>
