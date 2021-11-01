@@ -35,10 +35,10 @@
                         <label for="adminDistrict">County</label>
                         <input type="text" class="form-control" id="adminDistrict"
                             [(ngModel)]="current.adminDistrict" name="adminDistrict" required>
-                        <label for="adminDistrict">Country</label>
-                        <input type="text" class="form-control" id="adminDistrict"
-                            [(ngModel)]="current.adminDistrict" name="adminDistrict" required>
-                        <label for="streetAddress">Post Code</label>
+                        <label for="adminDistrict2">Country</label>
+                        <input type="text" class="form-control" id="adminDistrict2"
+                            [(ngModel)]="current.adminDistrict2" name="adminDistrict2" required>
+                        <label for="postCode">Post Code</label>
                         <input type="text" class="form-control" id="postCode"
                             [(ngModel)]="current.postCode" name="postCode" required>
                         <div class="submitter">
@@ -60,7 +60,7 @@
                 </div>
             </div>
             <div [ngClass]="oExpanded[1] ? 'expanded' : 'collapsed'" style="position: relative; height: 280px;">
-                <form (ngSubmit)="onCustomSubmit()" #endLocationForm="ngForm">
+                <form (ngSubmit)="onEndSubmit()" #endLocationForm="ngForm">
                     <label for="streetAddress">Street Address</label>
                     <input type="text" class="form-control" id="streetAddress"
                         [(ngModel)]="end.streetAddress" name="streetAddress" required>
@@ -70,10 +70,10 @@
                     <label for="adminDistrict">County</label>
                     <input type="text" class="form-control" id="adminDistrict"
                         [(ngModel)]="end.adminDistrict" name="adminDistrict" required>
-                    <label for="adminDistrict">Country</label>
-                    <input type="text" class="form-control" id="adminDistrict"
-                        [(ngModel)]="end.adminDistrict" name="adminDistrict" required>
-                    <label for="streetAddress">Post Code</label>
+                    <label for="adminDistrict2">Country</label>
+                    <input type="text" class="form-control" id="adminDistrict2"
+                        [(ngModel)]="end.adminDistrict2" name="adminDistrict2" required>
+                    <label for="postCode">Post Code</label>
                     <input type="text" class="form-control" id="postCode"
                         [(ngModel)]="end.postCode" name="postCode" required>
                     <div class="submitter">
