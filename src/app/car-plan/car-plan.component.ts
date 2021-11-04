@@ -1,6 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Location } from '../classes/location';
+import { CarPlanService } from './car-plan.service';
 
 @Component({
   selector: 'car-plan',
@@ -15,7 +17,7 @@ export class CarPlanComponent implements OnInit {
   current = new Location("","","","","");
   end = new Location("","","","","");
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private router: Router, private cps: CarPlanService) { }
 
   ngOnInit(): void {
   }
@@ -43,40 +45,36 @@ export class CarPlanComponent implements OnInit {
   }
 
   public onCustomSubmit(): void {
-    let header = {
-      //headers: new HttpHeaders().set("Authorization", "Bearer " + JSON.parse(this.AWS).AccessToken)
-    }
-    let params = {
-      streetAddress: this.current.streetAddress,
-      locality: this.current.locality,
-      adminDistrict: this.current.adminDistrict,
-      adminDistrict2: this.current.adminDistrict2,
-      postCode: this.current.postCode
-    }
-    this.httpClient.post("https://a1fivkgat7.execute-api.eu-west-2.amazonaws.com/dev/getLocation", params, header).subscribe(res => {
-      let test = JSON.stringify(res);
-      let json = JSON.parse(test);
-      let coords = json?.message?.resourceSets[0]?.resources[0]?.point?.coordinates;
+    this.cps.getLocationByAddress(this.current).subscribe(res => {
+      let coords = res?.resourceSets[0]?.resources[0]?.point?.coordinates;
       this.startCoords = [coords[0], coords[1]];
     });
   }
 
   public onEndSubmit(): void {
-    let header = {
-      //headers: new HttpHeaders().set("Authorization", "Bearer " + JSON.parse(this.AWS).AccessToken)
-    }
-    let params = {
-      streetAddress: this.end.streetAddress,
-      locality: this.end.locality,
-      adminDistrict: this.end.adminDistrict,
-      adminDistrict2: this.end.adminDistrict2,
-      postCode: this.end.postCode
-    }
-    this.httpClient.post("https://a1fivkgat7.execute-api.eu-west-2.amazonaws.com/dev/getLocation", params, header).subscribe(res => {
-      let test = JSON.stringify(res);
-      let json = JSON.parse(test);
-      let coords = json?.message?.resourceSets[0]?.resources[0]?.point?.coordinates;
+    this.cps.getLocationByAddress(this.end).subscribe(res => {
+      let coords = res?.resourceSets[0]?.resources[0]?.point?.coordinates;
       this.endCoords = [coords[0], coords[1]];
     });
+  }
+
+  public checkCoordsSet(): string {
+    if ( this.startCoords[0] !== 0 && this.startCoords[1] !== 0 && this.endCoords[0] !== 0 && this.endCoords[1] !== 0 ) {
+      return "button active-button";
+    }
+
+    return "button disabled-button";
+  }
+
+  public backToHome(): void {
+    this.router.navigateByUrl("/home");
+  }
+
+  public continue(): void {
+    const start: string = this.startCoords[0] + "," + this.startCoords[1];
+    const end: string = this.endCoords[0] + "," + this.endCoords[1];
+    this.cps.getRouteList(start, end, "MovieTheaters").subscribe(res => {
+      console.log(res)
+    })
   }
 }

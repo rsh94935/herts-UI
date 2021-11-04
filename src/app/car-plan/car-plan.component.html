@@ -1,4 +1,4 @@
-<div class="innerBody">
+<div class="innerBody bodyGrid">
     <div class="title">
         Enter Journey details
     </div>
@@ -82,6 +82,14 @@
                 </form>
             </div>
             <div class="underline"></div>
+        </div>
+    </div>
+    <div class="button-container">
+        <div class="button active-button" (click)="backToHome()">
+            BACK TO HOME
+        </div>
+        <div [ngClass]="checkCoordsSet()" (click)="continue()">
+            CONTINUE
         </div>
     </div>
 </div>
