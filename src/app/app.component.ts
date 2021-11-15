@@ -9,7 +9,7 @@ export class AppComponent {
   title = 'navigator-app';
   @HostListener('window:beforeunload')
   confirmLeavingPageBeforeSaving(): void {
-    localStorage.removeItem("Data");
-    localStorage.removeItem("AWSLogin");
+    // localStorage.removeItem("Data");
+    // localStorage.removeItem("AWSLogin");
   }
 }

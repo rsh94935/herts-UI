@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { preferences } from '../models/preferences.enum';
 
 @Component({
   selector: 'preferences',
@@ -12,14 +13,16 @@ export class PreferencesComponent implements OnInit {
   data: any = {};
   title: string = "Select your favourite activities";
   //Choices array also populates the HTML page, to add any future preferences, just need to add to the array
-  choices: Array<string> = ["Historical Landmarks", "Restaurants", "Shopping Centers", "Supermarkets", "Activities", "Walking Routes"];
+  choices: Array<string> = [];
   chosen: Array<string> = [];
+  preferences = preferences;
 
 
   constructor(private router: Router, private httpClient: HttpClient) { }
 
   //Need to check that the Preferences are in the local storage already, if they are then setup the chosen array with the contents of the localstorage
   ngOnInit(): void {
+    this.choices = Object.values(this.preferences);
     const prefs = localStorage.getItem("Data");
     this.AWS = localStorage.getItem('AWSLogin');
 
@@ -72,8 +75,6 @@ export class PreferencesComponent implements OnInit {
     let header = {
       headers: new HttpHeaders().set("Authorization", "Bearer " + JSON.parse(this.AWS).AccessToken)
     }
-
-    debugger
 
     for ( let key in this.data ) {
       prefData[key] = this.data[key];

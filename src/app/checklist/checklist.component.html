@@ -1,0 +1,32 @@
+<div class="checklistContainer">
+    <div class="checklist">
+        <div *ngFor="let page of pages; let i = index" class="pageGrid">
+            <div>{{page.entityName}}</div>
+            <div>{{page.overallDistance}}km</div>
+            <div>
+                <div [ngClass]="getClass(i)" (click)="selectChoice(i)"><p>&#10004;</p></div>
+            </div>
+        </div>
+    </div>
+    <div class="paginatorContainer">
+        <div class="paginator">
+            <div class="circle" (click)="first()">
+                <img src="assets/left2.svg">
+            </div>
+            <div class="circle" (click)="back()">
+                <img src="assets/left.svg">
+            </div>
+            <div>
+                <div class="pageNo">
+                    {{pageNo + 1}}
+                </div>
+            </div>
+            <div class="circle" (click)="next()">
+                <img src="assets/right.svg">
+            </div>
+            <div class="circle" (click)="last()">
+                <img src="assets/right2.svg">
+            </div>
+        </div>
+    </div>
+</div>

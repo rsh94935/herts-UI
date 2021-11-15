@@ -1,0 +1,23 @@
+.stats {
+    height: 100%;
+}
+
+.grid-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 1fr;
+    height: 30px;
+}
+
+.name {
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+}
+
+.value {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 20px;
+}

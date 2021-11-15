@@ -1,0 +1,14 @@
+<div class="innerBody bodyGrid">
+    <div class="title">
+        {{locPage[0]}}
+    </div>
+    <app-checklist [locations]="locPage" (updatedLocations)="updateLocations($event)"></app-checklist>
+    <div class="button-container">
+        <div class="button active-button" (click)="back()">
+            {{backButtonText}}
+        </div>
+        <div class="button active-button" (click)="continue()">
+            {{nextButtonText}}
+        </div>
+    </div>
+</div>

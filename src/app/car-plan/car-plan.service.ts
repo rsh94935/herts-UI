@@ -24,25 +24,32 @@ export class CarPlanService {
   }
 
   public getRouteList(start: string, end: string, type: string): Observable<any> {
+    const types: Array<string> = type.split(",");
     const retObs = new Observable((observer) => {
-        this.getRoutes(start, end, type).subscribe(res => {
-          observer.next(res);
+        this.getRoutes(start, end, types).subscribe(res => {
+          observer.next(this.calculateBestRoutes(res, types));
         })
     });
 
     return retObs;
   }
 
-  private getRoutes(start: string, end: string, type: string): Observable<any> {
+  private getRoutes(start: string, end: string, types: Array<string>): Observable<any> {
     const retObs = new Observable((observer) => {
         const url = "http://dev.virtualearth.net/REST/V1/Routes/Driving";
         const params = "?wp.0=" + start + "&wp.1=" + end + "&key=" + this.API_Key + "&maxSolutions=5";
+        let routeCounter: number = 0;
+        let routeArray: Array<any> = [];
 
         this.makeRequest(url+params).subscribe(res => {
+          const routeCount = res.resourceSets[0].resources.length;
           res.resourceSets[0].resources.forEach((resource: any) => {
-            this.getLocationsOnRoute(resource, type).subscribe(result => {
-              console.log(result);
-              observer.next();
+            this.getLocationsOnRoute(resource, types).subscribe(result => {
+              routeCounter++;
+              routeArray.push(result);
+              if ( routeCounter === routeCount ) {
+                observer.next(routeArray);
+              }
             })
           })
         });
@@ -51,11 +58,14 @@ export class CarPlanService {
     return retObs;
   }
 
-  private getLocationsOnRoute(resource: any, type: string): Observable<any> {
-    const types: Array<string> = type.split(",");
-    const locationCount = resource?.routeLegs[0]?.itineraryItems.length * types.length;
+  private getLocationsOnRoute(resource: any, types: Array<string>): Observable<any> {
+    const locationCount = ( resource?.routeLegs[0]?.itineraryItems.length * types.length );
     let locationCounter = 0;
+    let overallDistance = 0;
     let retVal: any = {};
+    retVal['start'] = [resource.bbox[0], resource.bbox[1]];
+    retVal['end'] = [resource.bbox[2], resource.bbox[3]];
+    retVal['distance'] = resource.travelDistance;
 
     types.forEach((sType: string) => {
       retVal[sType] = [];
@@ -64,28 +74,27 @@ export class CarPlanService {
     const retObs = new Observable((observer) => {
       let distance = 1;
       resource?.routeLegs[0]?.itineraryItems.forEach((stage: any) => {
+        overallDistance += distance;
+        distance += stage.travelDistance;
         if ( distance < 1 ) {
-          distance += stage.travelDistance;
-          locationCounter += (types.length + 1);
-          console.log(locationCounter)
-          console.log(locationCount)
+          locationCounter += types.length;
           if ( locationCounter === locationCount ) {
             observer.next(retVal);
           }
         } else {
+          distance = 0;
           const coords: Array<number> = stage?.maneuverPoint?.coordinates;
           const coordsString: string = coords[0] + "," + coords[1];
           types.forEach((sType: string) => {
             this.getLocations(coordsString, sType).subscribe(locationsResult => {
               locationsResult.forEach((location: any) => {
+                location['overallDistance'] = overallDistance;
                 const findResult = retVal[sType].find((val: any) => val.entityName === location.entityName);
                 if ( findResult === undefined ) {
                   retVal[sType].push(location);
                 }
               })
               locationCounter++;
-              console.log(locationCounter)
-              console.log(locationCount)
               if ( locationCounter === locationCount ) {
                 observer.next(retVal);
               }
@@ -123,5 +132,30 @@ export class CarPlanService {
       });
 
       return retObs;
+    }
+
+    private calculateBestRoutes(routes: any, types: Array<string>): Array<any> {
+      const obj: any = {};
+
+      //Go through each type and find the highest amount of variations for each attraction across all the routes
+      types.forEach((type: string) => {
+        let count = 0;
+        routes.forEach((route: any) => {
+          count = route[type].length > count ? route[type].length : count;
+        });
+        obj[type] = count;
+      });
+
+      routes.forEach((route: any) => {
+        let rating: number = 0;
+
+        Object.keys(obj).forEach((type: string) => {
+          rating += ((route[type].length / obj[type]) * 100) / types.length;
+        });
+
+        route["rating"] = rating
+      });
+
+      return routes;
     }
 }

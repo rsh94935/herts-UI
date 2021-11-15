@@ -14,6 +14,11 @@ import { SignupComponent } from './signup/signup.component';
 import { SplashComponent } from './splash/splash.component';
 import { TrainPlanComponent } from './train-plan/train-plan.component';
 import { CarPlanComponent } from './car-plan/car-plan.component';
+import { CarOptionsComponent } from './car-options/car-options.component';
+import { DropdownComponent } from './dropdown/dropdown.component';
+import { StatsComponent } from './stats/stats.component';
+import { CarSelectLocationsComponent } from './car-select-locations/car-select-locations.component';
+import { ChecklistComponent } from './checklist/checklist.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +29,12 @@ import { CarPlanComponent } from './car-plan/car-plan.component';
     PreferencesComponent,
     SplashComponent,
     TrainPlanComponent,
-    CarPlanComponent
+    CarPlanComponent,
+    CarOptionsComponent,
+    DropdownComponent,
+    StatsComponent,
+    CarSelectLocationsComponent,
+    ChecklistComponent
   ],
   imports: [
     BrowserModule,
@@ -40,6 +50,8 @@ import { CarPlanComponent } from './car-plan/car-plan.component';
       {path: 'signup', component: SignupComponent},
       {path: 'preferences', component: PreferencesComponent},
       {path: 'car-plan', component: CarPlanComponent},
+      {path: 'car-options', component: CarOptionsComponent},
+      {path: 'car-select-locations', component: CarSelectLocationsComponent},
       {path: 'train-plan', component: TrainPlanComponent},
       {path: '', redirectTo: '/splash', pathMatch: 'full'},
     ])

@@ -1,0 +1,13 @@
+<div class="stats">
+    <div style="padding-left: 10px;">
+        <h4>Journey Details:</h4>
+    </div>
+    <div *ngFor="let stat of statArray" class="grid-row">
+        <div class="name">
+            {{stat[0]}}:
+        </div>
+        <div class="value">
+            {{stat[1]}}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,17 @@
+<div class="innerBody bodyGrid">
+    <div class="title">
+        Select Journey
+    </div>
+    <div class="dropdown">
+        <app-dropdown [routes]="routes" (selectedRoute)="selectRoute($event)"></app-dropdown>
+    </div>
+    <app-stats [stats]="route"></app-stats>
+    <div class="button-container">
+        <div class="button active-button" (click)="backToHome()">
+            BACK TO HOME
+        </div>
+        <div class="button active-button" (click)="continue()">
+            CONTINUE
+        </div>
+    </div>
+</div>

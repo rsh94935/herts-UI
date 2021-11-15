@@ -1,0 +1,48 @@
+.dropdown {
+    height: 50px;
+    width: 100%;
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr 40px;
+    cursor: pointer;
+    border-bottom: 1px solid lightgrey;
+}
+
+.dropdownText {
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+}
+
+.dropdownIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dropdownContainer {
+    position: absolute;
+    width: 300px;
+    top: 40;
+    left: 0;
+    overflow-y: auto;
+}
+
+.item {
+    height: 40px;
+    background-color: white;
+    border-bottom: 1px solid lightgrey;
+    cursor: pointer;
+    width: 100%;
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr 80px 60px;
+    & div {
+        display: flex;
+        align-items: center;
+        margin-left: 10px;
+    }
+    &:hover {
+        background-color: lightgrey;
+    }
+}

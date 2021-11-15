@@ -1,0 +1,22 @@
+<div class="dropdown" (click)="toggle()">
+    <div class="dropdownText">
+        {{routeName}}
+    </div>
+    <div class="dropdownIcon">
+        <img *ngIf="!expanded" src="assets/down.svg">
+        <img *ngIf="expanded" src="assets/up.svg">
+    </div>
+</div>
+<div *ngIf="expanded" [ngStyle]="getHeight()" class="dropdownContainer">
+    <div *ngFor="let route of routes; let i = index" class="item" (click)="selectRoute(i)">
+        <div>
+            Route {{i + 1}}
+        </div>
+        <div>
+            {{route.distance}}km
+        </div>
+        <div>
+            {{route.rating}}%
+        </div>
+    </div>
+</div>

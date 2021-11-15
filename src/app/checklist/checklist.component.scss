@@ -1,0 +1,74 @@
+.checkListContainer {
+    display: grid;
+    grid-template-columns: 1fr 30px;
+    grid-template-columns: 1fr;
+    height: 100%;
+}
+
+.checklist {
+    height: 300px;
+    width: 100%;
+}
+
+.pageGrid {
+    height: 50px;
+    display: grid;
+    grid-template-columns: 1fr 80px 30px;
+    grid-template-rows: 1fr;
+    & div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+.tickbox {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    & p {
+        color: white;
+    }
+}
+
+.ticked {
+    background-color: #1289c7;
+}
+
+.unticked {
+    background-color: #e5e5e5;
+}
+
+.paginatorContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.paginator {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 140px;
+}
+
+.circle {
+    border-radius: 50%;
+    border: 1px solid lightgrey;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+}
+
+.pageNo {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid lightgrey;
+}
