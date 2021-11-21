@@ -65,7 +65,8 @@ export class CarSelectLocationsComponent implements OnInit {
 
   public continue(): void {
     if ( this.pageNo === this.locArray.length - 1 ) {
-      
+      localStorage.setItem('VisitedLocations', JSON.stringify(this.locArray));
+      this.router.navigateByUrl("/car-journey-map");
     } else {
       this.locArray[this.pageNo] = this.locPage;
       this.pageNo++;

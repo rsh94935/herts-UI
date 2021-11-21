@@ -1,0 +1,16 @@
+<div class="innerBody bodyGrid">
+    <div class="title">
+        Map
+    </div>
+    <div>
+        <img *ngIf="url !== ''" src={{url}}>
+    </div>
+    <div class="button-container">
+        <div class="button active-button" (click)="back()">
+            Cancel Journey
+        </div>
+        <div class="button active-button" (click)="continue()">
+            Journey Finished
+        </div>
+    </div>
+</div>

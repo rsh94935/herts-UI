@@ -19,6 +19,8 @@ import { DropdownComponent } from './dropdown/dropdown.component';
 import { StatsComponent } from './stats/stats.component';
 import { CarSelectLocationsComponent } from './car-select-locations/car-select-locations.component';
 import { ChecklistComponent } from './checklist/checklist.component';
+import { CarJourneyMapComponent } from './car-journey-map/car-journey-map.component';
+import { CarJourneyLocationRatingComponent } from './car-journey-location-rating/car-journey-location-rating.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import { ChecklistComponent } from './checklist/checklist.component';
     DropdownComponent,
     StatsComponent,
     CarSelectLocationsComponent,
-    ChecklistComponent
+    ChecklistComponent,
+    CarJourneyMapComponent,
+    CarJourneyLocationRatingComponent
   ],
   imports: [
     BrowserModule,
@@ -52,6 +56,8 @@ import { ChecklistComponent } from './checklist/checklist.component';
       {path: 'car-plan', component: CarPlanComponent},
       {path: 'car-options', component: CarOptionsComponent},
       {path: 'car-select-locations', component: CarSelectLocationsComponent},
+      {path: 'car-journey-map', component: CarJourneyMapComponent},
+      {path: 'car-journey-location-rating', component: CarJourneyLocationRatingComponent},
       {path: 'train-plan', component: TrainPlanComponent},
       {path: '', redirectTo: '/splash', pathMatch: 'full'},
     ])

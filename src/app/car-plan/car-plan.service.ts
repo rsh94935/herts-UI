@@ -121,18 +121,18 @@ export class CarPlanService {
       return retObs;
   }
 
-    private makeRequest(url: string): Observable<any> {
-      const retObs = new Observable((observer) => {
-        this.httpClient.get(url).subscribe(res => {
-          let test = JSON.stringify(res);
-          let json = JSON.parse(test);
-          
-          observer.next(json);
-        });
+  private makeRequest(url: string): Observable<any> {
+    const retObs = new Observable((observer) => {
+      this.httpClient.get(url).subscribe(res => {
+        let test = JSON.stringify(res);
+        let json = JSON.parse(test);
+        
+        observer.next(json);
       });
+    });
 
-      return retObs;
-    }
+    return retObs;
+  }
 
     private calculateBestRoutes(routes: any, types: Array<string>): Array<any> {
       const obj: any = {};
