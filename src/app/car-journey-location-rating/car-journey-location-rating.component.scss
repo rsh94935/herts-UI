@@ -1,0 +1,70 @@
+.bodyGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 50px 1fr 50px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(8, 40px);
+}
+
+.row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 25px 25px 25px;
+    grid-template-rows: 1fr;
+
+    & div {
+        display: flex;
+        align-items: center;
+        min-width: 0;
+        & p {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-size: 12px;
+        }
+    }
+}
+
+.box {
+    width: 20px;
+    height: 20px;
+    margin-top: 10px;
+}
+
+.tickbox {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    justify-content: center;
+    
+    & p {
+        color: white;
+        font-size: 16px !important;
+    }
+}
+
+.ticked {
+    background-color: #1289c7;
+}
+
+.unticked {
+    background-color: #e5e5e5;
+}
+
+.paginatorContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.button-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    height: 100%;
+}

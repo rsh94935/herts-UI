@@ -59,6 +59,16 @@ export class LoginComponent implements OnInit {
           let header = {
             headers: new HttpHeaders().set("Authorization", "Bearer " + accessTokenResponse["message"]["access_token"])
           }
+          this.httpClient.post("https://a1fivkgat7.execute-api.eu-west-2.amazonaws.com/dev/getUserVisited", params, header).subscribe(res => {
+            const userVisited: any = res;
+            let visited: Array<any> = [];
+
+            if ( userVisited["message"]["visited"] !== undefined ) {
+              visited = userVisited["message"]["visited"];
+            }
+
+            localStorage.setItem("StoredLocations", JSON.stringify(visited));
+          });
           this.httpClient.post("https://a1fivkgat7.execute-api.eu-west-2.amazonaws.com/dev/getUserData", params, header).subscribe(res => {
             const userDetails: any = res;
             //Check to see whether a required field exists in the database, if not, has to be a new user

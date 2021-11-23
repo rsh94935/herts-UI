@@ -32,6 +32,7 @@ export class ChecklistComponent implements OnChanges {
 
     for ( start; start < end; start++ ) {
       const loc = this.locations[1][start];
+      console.log(loc)
       if ( loc !== undefined ) {
         this.pages.push(loc);
       } else {
@@ -54,23 +55,8 @@ export class ChecklistComponent implements OnChanges {
     this.updatedLocations.emit(this.locations);
   }
 
-  public first(): void {
-    this.pageNo = 0;
-    this.setupPages();
-  }
-
-  public back(): void {
-    this.pageNo === 0 ? this.pageNo = 0 : this.pageNo--;
-    this.setupPages();
-  }
-
-  public next(): void {
-    this.pageNo === this.pageMax? this.pageNo = this.pageMax : this.pageNo++;
-    this.setupPages();
-  }
-
-  public last(): void {
-    this.pageNo = this.pageMax;
+  public selectPage(pageNo: number): void {
+    this.pageNo = pageNo;
     this.setupPages();
   }
 }

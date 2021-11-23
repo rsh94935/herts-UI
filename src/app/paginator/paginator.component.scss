@@ -1,0 +1,26 @@
+.paginator {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 140px;
+}
+
+.circle {
+    border-radius: 50%;
+    border: 1px solid lightgrey;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+}
+
+.pageNo {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid lightgrey;
+}

@@ -11,5 +11,9 @@ export class AppComponent {
   confirmLeavingPageBeforeSaving(): void {
     // localStorage.removeItem("Data");
     // localStorage.removeItem("AWSLogin");
+    // localStorage.removeItem("VisitedLocations");
+    // localStorage.removeItem("StoredLocations");
+    // localStorage.removeItem("Route");
+    // localStorage.removeItem("Routes");
   }
 }

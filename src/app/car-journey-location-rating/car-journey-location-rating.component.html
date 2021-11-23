@@ -1,1 +1,45 @@
-<p>car-journey-location-rating works!</p>
+<div class="innerBody bodyGrid">
+    <div class="title">
+        Rate locations
+    </div>
+    <div>
+        <div class="grid">
+            <div class="row">
+                <div>
+                    <p>Attraction name</p>
+                </div>
+                <div>
+                    <p>Attraction Type</p>
+                </div>
+                <div class="box" style="background-color: red;"></div>
+                <div class="box" style="background-color: grey;"></div>
+                <div class="box" style="background-color: green;"></div>
+            </div>
+            <div *ngFor="let page of attractionPages; let i = index" class="row">
+                <div>
+                    <p>{{page.name}}</p>
+                </div>
+                <div>
+                    <p>{{page.attractionType}}</p>
+                </div>
+                <div>
+                    <div [ngClass]="getClass(i, 'never')" (click)="selectChoice(i, 'never')"><p>&#10004;</p></div>
+                </div>
+                <div>
+                    <div [ngClass]="getClass(i, 'neutral')" (click)="selectChoice(i, 'neutral')"><p>&#10004;</p></div>
+                </div>
+                <div>
+                    <div [ngClass]="getClass(i, 'again')" (click)="selectChoice(i, 'again')"><p>&#10004;</p></div>
+                </div>
+            </div>
+            <div class="paginatorContainer">
+                <app-paginator [pageMax]="pageMax" (emitPage)="selectPage($event)"></app-paginator>
+            </div>
+        </div>
+    </div>
+    <div class="button-container">
+        <div class="button active-button" (click)="confirm()">
+            Confirm
+        </div>
+    </div>
+</div>

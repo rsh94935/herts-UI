@@ -21,6 +21,7 @@ import { CarSelectLocationsComponent } from './car-select-locations/car-select-l
 import { ChecklistComponent } from './checklist/checklist.component';
 import { CarJourneyMapComponent } from './car-journey-map/car-journey-map.component';
 import { CarJourneyLocationRatingComponent } from './car-journey-location-rating/car-journey-location-rating.component';
+import { PaginatorComponent } from './paginator/paginator.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { CarJourneyLocationRatingComponent } from './car-journey-location-rating
     CarSelectLocationsComponent,
     ChecklistComponent,
     CarJourneyMapComponent,
-    CarJourneyLocationRatingComponent
+    CarJourneyLocationRatingComponent,
+    PaginatorComponent
   ],
   imports: [
     BrowserModule,

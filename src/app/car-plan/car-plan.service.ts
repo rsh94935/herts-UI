@@ -6,7 +6,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class CarPlanService {
-    API_Key: string = "AgJX_cPiWHeH70dFAqEuqSWg-KWiTVDINccGgu5dBV0Re6Eb7P9cQLkjPBbCzR66";
+  API_Key: string = "AgJX_cPiWHeH70dFAqEuqSWg-KWiTVDINccGgu5dBV0Re6Eb7P9cQLkjPBbCzR66";
+  visited: Array<any> = [];
 
   constructor(private httpClient: HttpClient) { }
 
@@ -32,6 +33,13 @@ export class CarPlanService {
     });
 
     return retObs;
+  }
+
+  private getPreviouslyVisited(): void {
+    const stored = localStorage.getItem("StoredLocations");
+    if ( stored !== undefined && typeof(stored) === "string" ) {
+      this.visited = JSON.parse(stored);
+    }
   }
 
   private getRoutes(start: string, end: string, types: Array<string>): Observable<any> {
@@ -60,8 +68,8 @@ export class CarPlanService {
 
   private getLocationsOnRoute(resource: any, types: Array<string>): Observable<any> {
     const locationCount = ( resource?.routeLegs[0]?.itineraryItems.length * types.length );
-    let locationCounter = 0;
-    let overallDistance = 0;
+    let locationCounter: number = 0;
+    let overallDistance: number = 0;
     let retVal: any = {};
     retVal['start'] = [resource.bbox[0], resource.bbox[1]];
     retVal['end'] = [resource.bbox[2], resource.bbox[3]];
@@ -72,35 +80,46 @@ export class CarPlanService {
     })
 
     const retObs = new Observable((observer) => {
-      let distance = 1;
+      let distance: number = 0;
       resource?.routeLegs[0]?.itineraryItems.forEach((stage: any) => {
-        overallDistance += distance;
-        distance += stage.travelDistance;
-        if ( distance < 1 ) {
-          locationCounter += types.length;
-          if ( locationCounter === locationCount ) {
-            observer.next(retVal);
-          }
-        } else {
-          distance = 0;
-          const coords: Array<number> = stage?.maneuverPoint?.coordinates;
-          const coordsString: string = coords[0] + "," + coords[1];
-          types.forEach((sType: string) => {
-            this.getLocations(coordsString, sType).subscribe(locationsResult => {
-              locationsResult.forEach((location: any) => {
-                location['overallDistance'] = overallDistance;
-                const findResult = retVal[sType].find((val: any) => val.entityName === location.entityName);
-                if ( findResult === undefined ) {
-                  retVal[sType].push(location);
+        setTimeout(() => {
+          distance += stage.travelDistance;
+          if ( distance < 1 ) {
+            overallDistance += distance;
+            locationCounter += types.length;
+            if ( locationCounter === locationCount ) {
+              observer.next(retVal);
+            }
+          } else {
+            overallDistance += distance;
+            const routeDistance: number = Math.round(overallDistance * 100) / 100;
+            distance = 0;
+            const coords: Array<number> = stage?.maneuverPoint?.coordinates;
+            const coordsString: string = coords[0] + "," + coords[1];
+            types.forEach((sType: string) => {
+              this.getLocations(coordsString, sType).subscribe(locationsResult => {
+                locationsResult.forEach((location: any) => {
+                  location['overallDistance'] = routeDistance;
+                  const findResult = retVal[sType].find((val: any) => val.entityName === location.entityName);
+                  if ( findResult === undefined ) {
+                    const visitedLocation = this.visited.find((visit: any) => visit.name === location.entityName);
+                    if ( visitedLocation === undefined ) {
+                      retVal[sType].push(location);
+                    } else {
+                      if ( visitedLocation.visitAgain !== "never" ) {
+                        retVal[sType].push(location);
+                      }
+                    }
+                  }
+                })
+                locationCounter++;
+                if ( locationCounter === locationCount ) {
+                  observer.next(retVal);
                 }
-              })
-              locationCounter++;
-              if ( locationCounter === locationCount ) {
-                observer.next(retVal);
-              }
+              });
             });
-          });
-        }
+          }
+        }, 500);
       });
     });
 

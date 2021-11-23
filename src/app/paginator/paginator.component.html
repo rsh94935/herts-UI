@@ -1,0 +1,19 @@
+<div class="paginator">
+    <div class="circle" (click)="first()">
+        <img src="assets/left2.svg">
+    </div>
+    <div class="circle" (click)="back()">
+        <img src="assets/left.svg">
+    </div>
+    <div>
+        <div class="pageNo">
+            {{pageNo + 1}}
+        </div>
+    </div>
+    <div class="circle" (click)="next()">
+        <img src="assets/right.svg">
+    </div>
+    <div class="circle" (click)="last()">
+        <img src="assets/right2.svg">
+    </div>
+</div>
