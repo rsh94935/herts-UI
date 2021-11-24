@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -21,6 +21,7 @@ export class SignupComponent implements OnInit {
     city: '',
     postcode: ''
   });
+  @ViewChild('submitButton') submitButton: ElementRef;
 
   constructor(private formBuilder: FormBuilder, private router: Router, private httpClient: HttpClient) { }
 
@@ -67,6 +68,13 @@ export class SignupComponent implements OnInit {
       //If new user, go to signup page
       this.router.navigateByUrl('/preferences');
     });
-    //this.router.navigateByUrl(this.title === "Signup" ? '/preferences' : '/home');
+  }
+
+  //Function to click the hidden form button
+  public submitForm() {
+    const elem: HTMLElement = this.submitButton.nativeElement;
+    if ( elem !== undefined ) {
+      elem.click();
+    }
   }
 }

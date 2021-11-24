@@ -3,12 +3,6 @@
         {{locPage[0]}}
     </div>
     <app-checklist [locations]="locPage" (updatedLocations)="updateLocations($event)"></app-checklist>
-    <div class="button-container">
-        <div class="button active-button" (click)="back()">
-            {{backButtonText}}
-        </div>
-        <div class="button active-button" (click)="continue()">
-            {{nextButtonText}}
-        </div>
-    </div>
+    
+    <app-duo-buttons [redText]="backButtonText" [greenText]="nextButtonText" [greyed]="true" (green)="continue()" (red)="back()"></app-duo-buttons>
 </div>

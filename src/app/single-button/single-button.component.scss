@@ -1,0 +1,21 @@
+.singleButton {
+    width: 100%;
+    height: 50px;
+    & div {
+        width: 100%;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        cursor: pointer;
+        &.green {
+            background-color: #4DB34D;
+        }
+    
+        &.grey {
+            background-color: #848C94;
+            cursor: not-allowed;
+        }
+    }
+}

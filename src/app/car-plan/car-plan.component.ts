@@ -74,12 +74,12 @@ export class CarPlanComponent implements OnInit {
     });
   }
 
-  public checkCoordsSet(): string {
+  public checkCoordsSet(): boolean {
     if ( this.startCoords[0] !== 0 && this.startCoords[1] !== 0 && this.endCoords[0] !== 0 && this.endCoords[1] !== 0 ) {
-      return "button active-button";
+      return true;
     }
 
-    return "button disabled-button";
+    return false;
   }
 
   public backToHome(): void {

@@ -5,12 +5,5 @@
     <div>
         <img *ngIf="url !== ''" src={{url}}>
     </div>
-    <div class="button-container">
-        <div class="button active-button" (click)="back()">
-            Cancel Journey
-        </div>
-        <div class="button active-button" (click)="continue()">
-            Journey Finished
-        </div>
-    </div>
+    <app-duo-buttons [redText]="'Cancel Journey'" [greenText]="'Journey Finished'" [greyed]="true" (green)="continue()" (red)="back()"></app-duo-buttons>
 </div>

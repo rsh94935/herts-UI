@@ -84,12 +84,5 @@
             <div class="underline"></div>
         </div>
     </div>
-    <div class="button-container">
-        <div class="button active-button" (click)="backToHome()">
-            BACK TO HOME
-        </div>
-        <div [ngClass]="checkCoordsSet()" (click)="continue()">
-            CONTINUE
-        </div>
-    </div>
+    <app-duo-buttons [redText]="'BACK TO HOME'" [greenText]="'CONTINUE'" [greyed]=checkCoordsSet() (green)="continue()" (red)="backToHome()"></app-duo-buttons>
 </div>

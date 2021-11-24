@@ -54,8 +54,8 @@ export class PreferencesComponent implements OnInit {
   }
 
   //Do a check to see whether any item has been selected, at which point the user can continue, and save their choices to their profile
-  public canContinue(): string {
-    return this.chosen.length >= 1 ? "button active-button" : "button disabled-button";
+  public canContinue(): boolean {
+    return this.chosen.length >= 1 ? true : false;
   }
 
   //If users do not yet wish to save their preferences, they can skip to the home page

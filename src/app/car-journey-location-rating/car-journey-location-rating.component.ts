@@ -31,7 +31,6 @@ export class CarJourneyLocationRatingComponent implements OnInit {
     if ( locs !== undefined && typeof(locs) === "string" ) {
       parseLocs = JSON.parse(locs);
       parseLocs.forEach((loc: Array<any>) => {
-        console.log(loc)
         const attractionNames: Array<string> = loc[2];
 
         attractionNames.forEach((attraction: string) => {
@@ -43,7 +42,7 @@ export class CarJourneyLocationRatingComponent implements OnInit {
         });
       });
 
-      this.pageMax = Math.max(0, Math.round(( this.attractions.length / this.noOfRows ) - 1));
+      this.pageMax = Math.max(0, Math.round(( this.attractions.length / this.noOfRows )));
       this.setupPages();
     }
   }

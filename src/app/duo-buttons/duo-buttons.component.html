@@ -1,0 +1,8 @@
+<div class="button-grid">
+    <div class="red" (click)="back()">
+        {{redText}}
+    </div>
+    <div [ngClass]="!greyed ? 'grey' : 'green'" (click)="next()">
+        {{greenText}}
+    </div>
+</div>

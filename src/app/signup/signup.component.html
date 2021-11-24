@@ -1,7 +1,7 @@
 <div class="signup-form innerBody">
     <div class="title">{{title}}</div>
     <div class="signup-fields">
-        <form [formGroup]="detailsForm" (ngSubmit)="onSubmit()" style="position: relative; height: 440px;">
+        <form #addressForm="ngForm" [formGroup]="detailsForm" (ngSubmit)="onSubmit()" style="position: relative; height: 440px;">
             <div class="field">
                 <div>First Name:</div>
                 <input type="text"  formControlName="fname" required>
@@ -28,7 +28,8 @@
             </div>
             <br>
             <div class="submitter">
-                <input type="submit">
+                <input #submitButton style="visibility: hidden;" type="submit">
+                <app-single-button [greenText]="'Submit'" [greyed]="addressForm.form.valid" (green)="submitForm()"></app-single-button>
             </div>
         </form>
     </div>

@@ -6,12 +6,5 @@
         <app-dropdown [routes]="routes" (selectedRoute)="selectRoute($event)"></app-dropdown>
     </div>
     <app-stats [stats]="route"></app-stats>
-    <div class="button-container">
-        <div class="button active-button" (click)="backToHome()">
-            BACK TO HOME
-        </div>
-        <div class="button active-button" (click)="continue()">
-            CONTINUE
-        </div>
-    </div>
+    <app-duo-buttons [redText]="'BACK TO HOME'" [greenText]="'CONTINUE'" [greyed]="true" (green)="continue()" (red)="backToHome()"></app-duo-buttons>
 </div>

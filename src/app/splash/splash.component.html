@@ -1,7 +1,7 @@
-<div class="background">
-    <div class="innerBody">
-        <div class="title">Welcome to Navigator</div>
-        <br>
-        <div class="button active-button" (click)="navigate()">SIGN IN</div>
+<div class="innerBody">
+    <div class="splash">
+        <div class="appTitle">Welcome to Journey Planner</div>
+        <div class="title">Find the journey that's perfect for you, sign in to get started</div>
+        <app-single-button [greenText]="'SIGN IN'" [greyed]="true" (green)="navigate()"></app-single-button>
     </div>
 </div>

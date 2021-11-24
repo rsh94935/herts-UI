@@ -1,0 +1,28 @@
+.button-grid {
+    width: 100%;
+    height: 50px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+
+    & div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        cursor: pointer;
+        &.green {
+            background-color: #4DB34D;
+        }
+    
+        &.grey {
+            background-color: #848C94;
+            cursor: not-allowed;
+        }
+    
+        &.red {
+            background-color: #D22D2D;
+        }
+    }
+
+}

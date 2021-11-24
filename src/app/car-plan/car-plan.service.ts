@@ -172,7 +172,7 @@ export class CarPlanService {
           rating += ((route[type].length / obj[type]) * 100) / types.length;
         });
 
-        route["rating"] = rating
+        route["rating"] = Math.round(rating * 100) / 100
       });
 
       return routes;

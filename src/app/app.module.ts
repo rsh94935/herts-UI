@@ -22,6 +22,8 @@ import { ChecklistComponent } from './checklist/checklist.component';
 import { CarJourneyMapComponent } from './car-journey-map/car-journey-map.component';
 import { CarJourneyLocationRatingComponent } from './car-journey-location-rating/car-journey-location-rating.component';
 import { PaginatorComponent } from './paginator/paginator.component';
+import { DuoButtonsComponent } from './duo-buttons/duo-buttons.component';
+import { SingleButtonComponent } from './single-button/single-button.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,9 @@ import { PaginatorComponent } from './paginator/paginator.component';
     ChecklistComponent,
     CarJourneyMapComponent,
     CarJourneyLocationRatingComponent,
-    PaginatorComponent
+    PaginatorComponent,
+    DuoButtonsComponent,
+    SingleButtonComponent
   ],
   imports: [
     BrowserModule,

@@ -15,21 +15,23 @@
                 <div class="box" style="background-color: grey;"></div>
                 <div class="box" style="background-color: green;"></div>
             </div>
-            <div *ngFor="let page of attractionPages; let i = index" class="row">
-                <div>
-                    <p>{{page.name}}</p>
-                </div>
-                <div>
-                    <p>{{page.attractionType}}</p>
-                </div>
-                <div>
-                    <div [ngClass]="getClass(i, 'never')" (click)="selectChoice(i, 'never')"><p>&#10004;</p></div>
-                </div>
-                <div>
-                    <div [ngClass]="getClass(i, 'neutral')" (click)="selectChoice(i, 'neutral')"><p>&#10004;</p></div>
-                </div>
-                <div>
-                    <div [ngClass]="getClass(i, 'again')" (click)="selectChoice(i, 'again')"><p>&#10004;</p></div>
+            <div class="innerGrid">
+                <div *ngFor="let page of attractionPages; let i = index" class="row">
+                    <div>
+                        <p>{{page.name}}</p>
+                    </div>
+                    <div>
+                        <p>{{page.attractionType}}</p>
+                    </div>
+                    <div>
+                        <div [ngClass]="getClass(i, 'never')" (click)="selectChoice(i, 'never')"><p>&#10004;</p></div>
+                    </div>
+                    <div>
+                        <div [ngClass]="getClass(i, 'neutral')" (click)="selectChoice(i, 'neutral')"><p>&#10004;</p></div>
+                    </div>
+                    <div>
+                        <div [ngClass]="getClass(i, 'again')" (click)="selectChoice(i, 'again')"><p>&#10004;</p></div>
+                    </div>
                 </div>
             </div>
             <div class="paginatorContainer">
@@ -37,9 +39,5 @@
             </div>
         </div>
     </div>
-    <div class="button-container">
-        <div class="button active-button" (click)="confirm()">
-            Confirm
-        </div>
-    </div>
+    <app-single-button [greenText]="'CONFIRM'" [greyed]="true" (green)="confirm()"></app-single-button>
 </div>
