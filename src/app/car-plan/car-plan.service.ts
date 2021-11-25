@@ -26,6 +26,7 @@ export class CarPlanService {
 
   public getRouteList(start: string, end: string, type: string): Observable<any> {
     const types: Array<string> = type.split(",");
+    this.getPreviouslyVisited();
     const retObs = new Observable((observer) => {
         this.getRoutes(start, end, types).subscribe(res => {
           observer.next(this.calculateBestRoutes(res, types));
@@ -38,7 +39,12 @@ export class CarPlanService {
   private getPreviouslyVisited(): void {
     const stored = localStorage.getItem("StoredLocations");
     if ( stored !== undefined && typeof(stored) === "string" ) {
-      this.visited = JSON.parse(stored);
+      const json = JSON.parse(stored);
+      if ( typeof(json) === "string" ) {
+        this.visited = JSON.parse(json);
+      } else {
+        this.visited = json;        
+      }
     }
   }
 
@@ -169,11 +175,22 @@ export class CarPlanService {
         let rating: number = 0;
 
         Object.keys(obj).forEach((type: string) => {
+          route[type].forEach((attraction: any) => {
+            const place = this.visited.find((visit: any) => visit.name === attraction.entityName);
+
+            if ( place !== undefined ) {
+              if ( place.visitAgain === "again" ) {
+                rating += 5;
+              }
+            }
+          });
           rating += ((route[type].length / obj[type]) * 100) / types.length;
         });
 
-        route["rating"] = Math.round(rating * 100) / 100
+        route["rating"] = Math.min(100, Math.round(rating));
       });
+
+      routes.sort((a, b) => b.rating - a.rating);
 
       return routes;
     }

@@ -34,9 +34,17 @@ export class CarJourneyLocationRatingComponent implements OnInit {
         const attractionNames: Array<string> = loc[2];
 
         attractionNames.forEach((attraction: string) => {
+          const place = this.visited.find((visit: any) => visit.name === attraction);
+          let visitAgain: string = "neutral";
+
+          if ( place !== undefined ) {
+            if ( place.visitAgain === "again" ) {
+              visitAgain = "again";
+            }
+          }
           this.attractions.push({
             name: attraction,
-            visitAgain: 'neutral',
+            visitAgain: visitAgain,
             attractionType: loc[0]
           })
         });
@@ -50,7 +58,12 @@ export class CarJourneyLocationRatingComponent implements OnInit {
   private setVisitedLocationsFromStorage(): void {
     const stored = localStorage.getItem("StoredLocations");
     if ( stored !== undefined && typeof(stored) === "string" ) {
-      this.visited = JSON.parse(stored);
+      const json = JSON.parse(stored);
+      if ( typeof(json) === "string" ) {
+        this.visited = JSON.parse(json);
+      } else {
+        this.visited = json;        
+      }
     }
   }
 
@@ -110,6 +123,7 @@ export class CarJourneyLocationRatingComponent implements OnInit {
     }
     this.httpClient.post("https://a1fivkgat7.execute-api.eu-west-2.amazonaws.com/dev/setUserVisited", params, header).subscribe(res => {
       //If new user, go to signup page
+      localStorage.setItem("StoredLocations", JSON.stringify(this.visited));
       this.router.navigateByUrl('/home');
     });
   }
