@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CarJourneyMapService } from './car-journey-map.service';
+import { TrainJourneyMapService } from './train-journey-map.service';
 
 @Component({
-  selector: 'app-car-journey-map',
-  templateUrl: './car-journey-map.component.html',
-  styleUrls: ['./car-journey-map.component.scss']
+  selector: 'app-train-journey-map',
+  templateUrl: './train-journey-map.component.html',
+  styleUrls: ['./train-journey-map.component.scss']
 })
-export class CarJourneyMapComponent implements OnInit {
+export class TrainJourneyMapComponent implements OnInit {
   url: string = "";
 
-  constructor(private cjms: CarJourneyMapService, private router: Router) { }
+  constructor(private tjms: TrainJourneyMapService, private router: Router) { }
 
   ngOnInit(): void {
     const locs = localStorage.getItem("VisitedLocations");
@@ -24,7 +24,7 @@ export class CarJourneyMapComponent implements OnInit {
       parseRoute = JSON.parse(route);
     }
     
-    this.cjms.getLocationByAddress(parseRoute.start, parseRoute.end, parseLocs).subscribe(res => {
+    this.tjms.getLocationByAddress(parseRoute.start, parseRoute.end, parseLocs).subscribe(res => {
       this.url = res;
     });
   }
@@ -34,6 +34,6 @@ export class CarJourneyMapComponent implements OnInit {
   }
 
   public continue(): void {
-    this.router.navigateByUrl("/train-journey-location-rating");
+    this.router.navigateByUrl("/car-journey-location-rating");
   }
 }

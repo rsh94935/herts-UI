@@ -1,0 +1,9 @@
+<div class="innerBody bodyGrid">
+    <div class="title">
+        Map
+    </div>
+    <div>
+        <img *ngIf="url !== ''" src={{url}}>
+    </div>
+    <app-duo-buttons [redText]="'Cancel Journey'" [greenText]="'Journey Finished'" [greyed]="true" (green)="continue()" (red)="back()"></app-duo-buttons>
+</div>

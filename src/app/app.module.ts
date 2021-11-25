@@ -25,6 +25,9 @@ import { PaginatorComponent } from './paginator/paginator.component';
 import { DuoButtonsComponent } from './duo-buttons/duo-buttons.component';
 import { SingleButtonComponent } from './single-button/single-button.component';
 import { TrainOptionsComponent } from './train-options/train-options.component';
+import { TrainSelectLocationsComponent } from './train-select-locations/train-select-locations.component';
+import { TrainJourneyMapComponent } from './train-journey-map/train-journey-map.component';
+import { TrainJourneyLocationRatingComponent } from './train-journey-location-rating/train-journey-location-rating.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +49,10 @@ import { TrainOptionsComponent } from './train-options/train-options.component';
     PaginatorComponent,
     DuoButtonsComponent,
     SingleButtonComponent,
-    TrainOptionsComponent
+    TrainOptionsComponent,
+    TrainSelectLocationsComponent,
+    TrainJourneyMapComponent,
+    TrainJourneyLocationRatingComponent
   ],
   imports: [
     BrowserModule,
@@ -67,6 +73,10 @@ import { TrainOptionsComponent } from './train-options/train-options.component';
       {path: 'car-journey-map', component: CarJourneyMapComponent},
       {path: 'car-journey-location-rating', component: CarJourneyLocationRatingComponent},
       {path: 'train-plan', component: TrainPlanComponent},
+      {path: 'train-options', component: TrainOptionsComponent},
+      {path: 'train-select-locations', component: TrainSelectLocationsComponent},
+      {path: 'train-journey-map', component: TrainJourneyMapComponent},
+      {path: 'train-journey-location-rating', component: TrainJourneyLocationRatingComponent},
       {path: '', redirectTo: '/splash', pathMatch: 'full'},
     ])
   ],

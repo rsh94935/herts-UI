@@ -1,0 +1,8 @@
+<div class="innerBody bodyGrid">
+    <div class="title">
+        {{locPage[0]}}
+    </div>
+    <app-checklist [locations]="locPage" (updatedLocations)="updateLocations($event)"></app-checklist>
+    
+    <app-duo-buttons [redText]="backButtonText" [greenText]="nextButtonText" [greyed]="true" (green)="continue()" (red)="back()"></app-duo-buttons>
+</div>
