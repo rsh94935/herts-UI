@@ -15,26 +15,38 @@
             </div>
             <div [ngClass]="oExpanded[0] ? 'expanded' : 'collapsed'" style="height: 330px">
                 <div>
-                    <form (ngSubmit)="onCustomSubmit()" #currentLocationForm="ngForm" style="position: relative; height: 280px;">
+                    <form #currentLocationForm="ngForm" style="position: relative; height: 280px;">
                         <label for="city">Town/City:</label>
                         <input type="text" class="form-control" id="city" [(ngModel)]="current.city" name="city" required>
-                        <br>
-                        <br>
-                        <label for="date">Start date:</label>
-                        <br>
-                        <input [(ngModel)]="current.date" type="date" name="startDate" value="2021-11-22" min="2021-01-01" max="2050-12-31">
                         <br>
                         <br>
                         <label for="time">Choose a time for journey start:</label>
                         <br>
                         <input [(ngModel)]="current.time" type="time" name="startTime" required>
-                        <div class="submitter">
-                            <button type="submit" class="button" [disabled]="!currentLocationForm.form.valid">Submit</button>
-                        </div>
                     </form>
                 </div>
             </div>
             <div class="underline"></div>
         </div>
+        <div id="tl">
+            <div class="header">
+                <div class="headerText">
+                    End location
+                </div>
+                <div class="headerIcon" (click)="toggle(1)">
+                    <img *ngIf="!oExpanded[1]" src="assets/down.svg">
+                    <img *ngIf="oExpanded[1]" src="assets/up.svg">
+                </div>
+            </div>
+            <div [ngClass]="oExpanded[1] ? 'expanded' : 'collapsed'" style="position: relative; height: 280px;">
+                <form #endLocationForm="ngForm">
+                    <label for="streetAddress">City/Town:</label>
+                    <input type="text" class="form-control" id="city"
+                        [(ngModel)]="end.city" name="city" required>
+                </form>
+            </div>
+            <div class="underline"></div>
+        </div>
     </div>
+    <app-duo-buttons [redText]="'BACK TO HOME'" [greenText]="'CONTINUE'" [greyed]=checkCoordsSet() (green)="continue()" (red)="backToHome()"></app-duo-buttons>
 </div>

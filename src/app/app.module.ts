@@ -24,6 +24,7 @@ import { CarJourneyLocationRatingComponent } from './car-journey-location-rating
 import { PaginatorComponent } from './paginator/paginator.component';
 import { DuoButtonsComponent } from './duo-buttons/duo-buttons.component';
 import { SingleButtonComponent } from './single-button/single-button.component';
+import { TrainOptionsComponent } from './train-options/train-options.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { SingleButtonComponent } from './single-button/single-button.component';
     CarJourneyLocationRatingComponent,
     PaginatorComponent,
     DuoButtonsComponent,
-    SingleButtonComponent
+    SingleButtonComponent,
+    TrainOptionsComponent
   ],
   imports: [
     BrowserModule,
