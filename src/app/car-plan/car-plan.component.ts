@@ -38,8 +38,6 @@ export class CarPlanComponent implements OnInit {
     this.handleChange("current");
   }
 
-  //WIP page
-
   public toggle(section: number): void {
     this.oExpanded[1-section] = false;
     this.oExpanded[section] = !this.oExpanded[section];
