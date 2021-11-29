@@ -165,31 +165,41 @@ export class CarPlanService {
       //Go through each type and find the highest amount of variations for each attraction across all the routes
       types.forEach((type: string) => {
         let count = 0;
+        //Go through each route
         routes.forEach((route: any) => {
+          //If this routes amount of attractions is higher than the current highest, set to this value
           count = route[type].length > count ? route[type].length : count;
         });
         obj[type] = count;
       });
 
+      //Go through list of routes again to determine rating for each one
       routes.forEach((route: any) => {
         let rating: number = 0;
 
+        //Go through all types of attraction
         Object.keys(obj).forEach((type: string) => {
           route[type].forEach((attraction: any) => {
+            //Get the place object to check whether the user wished to visit this location again
             const place = this.visited.find((visit: any) => visit.name === attraction.entityName);
 
             if ( place !== undefined ) {
               if ( place.visitAgain === "again" ) {
+                //If the user did want to visit the location again, automatically add 5 percent to the rating
                 rating += 5;
               }
             }
           });
+
+          //Divide the amount of attractions by the maximum there can be across all routes, calculate as a percentage, then divide by the amount of attraction types there are
           rating += ((route[type].length / obj[type]) * 100) / types.length;
         });
 
+        //Ensure that the rating is a maximum of 100
         route["rating"] = Math.min(100, Math.round(rating));
       });
 
+      //Sort the route list by the rating value (Highest rating is first ect)
       routes.sort((a, b) => b.rating - a.rating);
 
       return routes;
